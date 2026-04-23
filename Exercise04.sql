@@ -1,0 +1,16 @@
+CREATE DATABASE MyAppDB;
+USE MyAppDB;
+
+CREATE TABLE USERS (
+    UserID INT PRIMARY KEY,
+    UserName VARCHAR(50),
+    Phone INT
+);
+
+ALTER TABLE USERS ADD Phone_new VARCHAR(15);
+
+UPDATE USERS SET Phone_new = CAST(Phone AS VARCHAR(15));
+
+ALTER TABLE USERS DROP COLUMN Phone;
+
+EXEC sp_rename 'USERS.Phone_new', 'Phone', 'COLUMN';
